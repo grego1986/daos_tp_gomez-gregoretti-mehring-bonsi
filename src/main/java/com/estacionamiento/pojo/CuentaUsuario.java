@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 public class CuentaUsuario {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_cuenta;
 	@Column(name="user")
 	private String usuario;

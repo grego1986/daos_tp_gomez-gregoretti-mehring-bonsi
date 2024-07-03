@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 public class Estacionamiento {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_estacionamiento;
 	@ManyToMany
 	@JoinTable(name = "estacionamiento_vehiculo")

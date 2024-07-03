@@ -1,11 +1,13 @@
 package com.estacionamiento.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.estacionamiento.pojo.Comercio;
+import com.estacionamiento.pojo.Persona;
 import com.estacionamiento.repository.IComercioRepo;
 
 @Service
@@ -40,4 +42,9 @@ public class ComercioService implements IComercioService {
 		return comercioRepo.findById(id).orElse(null);
 	}
 
+	@Override
+	public Optional<Comercio> buscarOptional(Long id) {
+		
+		return comercioRepo.findById(id);
+	}
 }

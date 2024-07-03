@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 public class Saldo {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idsaldo;
 	@Column(name="saldo")
 	private Float saldo;
