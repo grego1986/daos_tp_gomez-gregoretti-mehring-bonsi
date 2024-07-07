@@ -6,5 +6,5 @@ import com.estacionamiento.pojo.Persona;
 
 @Repository
 public interface IPersonaRepo extends JpaRepository<Persona, Long>{
-
+	Persona findByDni(Long dni);
 }

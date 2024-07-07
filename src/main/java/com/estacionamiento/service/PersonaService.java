@@ -7,51 +7,79 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.estacionamiento.pojo.Persona;
+import com.estacionamiento.pojo.Vehiculo;
 import com.estacionamiento.repository.IPersonaRepo;
+import com.estacionamiento.repository.IVehiculoRepo;
 
-@Service 
+@Service
 public class PersonaService implements IPersonaService {
 
 	@Autowired
-	private IPersonaRepo personaRepo;
-	
+	private IPersonaRepo usuarioRepo;
+	@Autowired
+	private IVehiculoRepo vehiculoRepo;
+
+	public Persona crearUsuario(Persona usuario, Vehiculo vehiculo, Long id) {
+
+		if (usuarioRepo.findByDni(
+				usuario.getDni()) != null || vehiculoRepo.findBypatente(vehiculo.getPatente()) != null) {
+			throw new RuntimeException("DNI o Patente ya existe");
+
+		}
+
+		return usuarioRepo.save(usuario);
+
+	}
+
+	// Se actualizan todo los datos exepto DNI ya que es id de la entidad y no debe
+	// ser cambiado.
+	public Persona actualizarUsuario(Persona usuarioActualizado, Long id) {
+		Optional<Persona> optionalPersona = usuarioRepo.findById(id);
+
+		if (optionalPersona.isPresent()) {
+
+			Persona usuarioExistente = optionalPersona.get();
+
+			usuarioExistente.setApellido(usuarioActualizado.getApellido());
+			usuarioExistente.setNombre(usuarioActualizado.getNombre());
+			usuarioExistente.setEmail(usuarioActualizado.getEmail());
+			usuarioExistente.setNacimiento(usuarioActualizado.getNacimiento());
+			usuarioExistente.setVehiculo(usuarioActualizado.getVehiculo());
+			usuarioExistente.setRecargas(usuarioActualizado.getRecargas());
+			usuarioExistente.setSaldo(usuarioActualizado.getSaldo());
+			usuarioExistente.setCuenta_usuario(usuarioActualizado.getCuenta_usuario());
+
+			return usuarioRepo.save(usuarioExistente);
+		} else {
+			throw new RuntimeException("Usuario no encontrado");
+		}
+		
+
+	}
+
 	@Override
 	public List<Persona> listar() {
-		
-		return personaRepo.findAll();
-	}
 
-	@Override
-	public void agregar(Persona persona) {
-		
-		personaRepo.save(persona);
-	}
-
-	@Override
-	public void actualizar(Persona persona, Long id) {
-		
-		if (personaRepo.existsById(id)) {
-            persona.setDni(id);
-            personaRepo.save(persona);
-        }
-	}
-
-	@Override
-	public void borrar(Persona persona) {
-		
-		personaRepo.delete(persona);
+		return usuarioRepo.findAll();
 	}
 
 	@Override
 	public Persona buscar(Long id) {
-		
-		return personaRepo.findById(id).orElse(null);
+
+		return usuarioRepo.findById(id).orElse(null);
+	}
+
+	@Override
+	public void borrar(Long id) {
+		usuarioRepo.deleteById(id);
+
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public Optional<Persona> buscarOptional(Long id) {
-		
-		return personaRepo.findById(id);
+		return usuarioRepo.findById(id);
 	}
 
 }

@@ -1,14 +1,17 @@
 package com.estacionamiento.service;
 
-import java.util.List;
-
 import com.estacionamiento.pojo.Estacionamiento;
+import com.estacionamiento.pojo.Vehiculo;
 
 public interface IEstacionamientoService {
 
-	public List<Estacionamiento> listar();
-	public void agregar(Estacionamiento estacionamiento);
-	public void actualizar(Estacionamiento estacionamiento, Long id);
-	public void borrar(Estacionamiento estacionamiento);
-	public Estacionamiento buscar (Long id);
+	/* Obtiene los estacionamientos a partir de su id */
+	public Estacionamiento consultarEstacionamiento(String patente) throws Exception;
+
+	/* Actualiza datos de un estacionamiento */
+	public Estacionamiento actualizarEstacionamiento(String patente, Vehiculo vehiculo) throws Exception;
+
+	/* Inserta un registro de estacionamiento */
+	public Estacionamiento insertarEstacionamiento(Estacionamiento estacionamiento) throws Exception;
+
 }

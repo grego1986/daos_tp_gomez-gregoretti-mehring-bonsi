@@ -1,8 +1,10 @@
 package com.estacionamiento.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.estacionamiento.pojo.Recarga;
@@ -45,6 +47,11 @@ public class RecargaService implements IRecargaService {
 	public Recarga buscar(Long id) {
 		
 		return recargaRepo.findById(id).orElse(null);
+	}
+
+	@Override
+	public Optional<Recarga> buscarOptional(Long id) {
+		return recargaRepo.findById(id);
 	}
 
 }

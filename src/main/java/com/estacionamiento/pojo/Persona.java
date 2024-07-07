@@ -40,6 +40,14 @@ public class Persona {
 		super();
 	}
 
+    
+	public Persona(Long dni) {
+		super();
+		this.dni = dni;
+	}
+
+
+
 
 	public Long getDni() {
 		return dni;

@@ -1,6 +1,7 @@
 package com.estacionamiento.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,11 @@ public class VehiculoSevice implements IVehiculoService {
 	public Vehiculo buscar(String id) {
 		
 		return vehiculoRepo.findById(id).orElse(null);
+	}
+
+	@Override
+	public Optional<Vehiculo> buscarOptional(String id) {
+		return vehiculoRepo.findById(id);
 	}
 
 }

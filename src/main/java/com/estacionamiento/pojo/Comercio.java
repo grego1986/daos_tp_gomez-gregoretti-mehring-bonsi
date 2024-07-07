@@ -27,6 +27,13 @@ public class Comercio {
 		super();
 	}
 
+	public Comercio(Long cuil) {
+		super();
+		this.cuil = cuil;
+	}
+
+
+
 	public Long getCuil() {
 		return cuil;
 	}

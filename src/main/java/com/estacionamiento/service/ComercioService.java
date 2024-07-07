@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.estacionamiento.pojo.Comercio;
-import com.estacionamiento.pojo.Persona;
 import com.estacionamiento.repository.IComercioRepo;
 
 @Service
@@ -44,7 +43,16 @@ public class ComercioService implements IComercioService {
 
 	@Override
 	public Optional<Comercio> buscarOptional(Long id) {
-		
 		return comercioRepo.findById(id);
+	}
+
+	@Override
+	public void delete(Long id) {
+		Comercio c;
+		if (comercioRepo.existsById(id)) {
+            c = buscar(id);
+            c.setEstado(false);
+            comercioRepo.save(c);
+        }
 	}
 }
